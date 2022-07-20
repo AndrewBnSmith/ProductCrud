@@ -1,18 +1,18 @@
 package com.xpanxion.demo3.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Entity //tells mysql that this Product class will be a table in the database
 public class Product {
 
-    @Id
+    @Id //tells mysql that id will be unique for each Product
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column //tells mysql that each attribute will be a column in the table
     private String name;
+    @Column
     private String description;
+    @Column
     private double price;
 
     public Product() {
