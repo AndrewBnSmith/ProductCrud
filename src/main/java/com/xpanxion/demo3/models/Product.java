@@ -8,12 +8,22 @@ public class Product {
     @Id //tells mysql that id will be unique for each Product
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column //tells mysql that each attribute will be a column in the table
+    @Column  //tells mysql that each attribute will be a column in the table
     private String name;
     @Column
     private String description;
     @Column
     private double price;
+    @ManyToOne
+    private Supplier supplier;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 
     public Product() {
 
