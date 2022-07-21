@@ -1,23 +1,28 @@
 package com.xpanxion.demo3.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Supplier {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int supplierId;
+    @Column
     private String supplierName;
+    @Column
     private String contactName;
+    @Column
     private String address;
+    @Column
     private String city;
+    @Column
     private int postCode;
+    @Column
     private String country;
+    @Column
     private int phone;
+    @Column
     @OneToMany
     private List<Product> products;
 

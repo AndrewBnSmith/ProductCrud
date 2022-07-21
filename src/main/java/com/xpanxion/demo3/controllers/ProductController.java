@@ -4,6 +4,7 @@ import com.xpanxion.demo3.models.Product;
 import com.xpanxion.demo3.repositories.ProductRepository;
 import com.xpanxion.demo3.services.ProductService;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.ServletException;
 
 import java.util.List;
 
@@ -18,22 +19,22 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/show")                  //endpoint, if you just do ("/") this is the default starting page.
+    @GetMapping("/product/all")                  //endpoint, if you just do ("/") this is the default starting page.
     public List<Product> showProducts() {
         return productServ.getAllProducts();
     }
 
-    @GetMapping("/show/{id}")
+    @GetMapping("/product/{id}")
     public Product showOneProduct(@PathVariable("id") int id) {                       //because we pass in the id in the url, we also need to pass in the id as a parameter in the method using PathVariable.
         return productRepository.findById(id).get();
     }
 
-    @PostMapping("/createProduct")                                                 // whenever we save to the database we use POST
+    @PostMapping("/create/product")                                                 // whenever we save to the database we use POST
     public Product createProduct(@RequestBody Product product) {                      // takes in an object of type Product, the @RequestBody allows us use the product object in JSON
         return this.productRepository.save(product);                                  //the repository handles this and saves product to the database
     }
 
-    @PutMapping("/update/{id}")                                                    //because we pass in the id in the url, we also need to pass in the id as a parameter in the method using PathVariable.
+    @PutMapping("/update/product/{id}")                                                    //because we pass in the id in the url, we also need to pass in the id as a parameter in the method using PathVariable.
     public Product updateProduct(@RequestBody Product product, @PathVariable("id") int id) {
         Product newProduct = this.productRepository.findById(id).get();              // using the id parameter we passed in, we find the product and store it in a newProduct
         newProduct.setName(product.getName());                                       //set the newProducts attributes using the getters and setters we created in the Product model
@@ -42,7 +43,7 @@ public class ProductController {
         return this.productRepository.save(newProduct);                              //saving the newProduct/updating the attributes
     }
 
-    @DeleteMapping("/delete/{id}")                                                //because we pass in the id in the url, we also need to pass in the id as a parameter in the method using PathVariable.
+    @DeleteMapping("/delete/product/{id}")                                                //because we pass in the id in the url, we also need to pass in the id as a parameter in the method using PathVariable.
     public void deleteProduct(@PathVariable("id") int id) {
         productRepository.deleteById(id);                                            //deletes the object by the id that we passed in from the url
     }
